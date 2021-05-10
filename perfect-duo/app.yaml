@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perfect-duo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: perfect-duo
+  template:
+    metadata:
+     labels:
+      name: perfect-duo
+    spec:
+      serviceAccountName: learnk8s-challenge
+      containers:
+        - name: perfect-duo-1
+          image: learnk8s/fundamentals:tweedledee
+        - name: perfect-duo-2
+          image: learnk8s/fundamentals:tweedledum

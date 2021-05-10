@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fundamentals-basics-kaiohps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: fundamentals-basics-kaiohps
+  template:
+    metadata:
+     labels:
+      name: fundamentals-basics-kaiohps
+    spec:
+      serviceAccountName: learnk8s-challenge
+      containers:
+        - name: fundamentals-basics-kaiohps
+          image: learnk8s/fundamentals:basics
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fundamentals-basics-kaiohps
+spec:
+  selector:
+    name: fundamentals-basics-kaiohps
+  ports:
+    - port: 8080
+      targetPort: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fundamentals-basics-kaiohps
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: fundamentals-basics-kaiohps
+            port:
+              number: 8080

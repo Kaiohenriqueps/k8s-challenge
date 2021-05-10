@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fundamentals-inspect-kaiohps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: fundamentals-inspect-kaiohps
+  template:
+    metadata:
+     labels:
+      name: fundamentals-inspect-kaiohps
+    spec:
+      serviceAccountName: learnk8s-challenge
+      containers:
+        - name: fundamentals-inspect-kaiohps
+          image: learnk8s/fundamentals:inspect

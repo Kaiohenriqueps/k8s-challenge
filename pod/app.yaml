@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fundamentals-pod-kaiohps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: fundamentals-pod-kaiohenriqueps
+  template:
+    metadata:
+     labels:
+      name: fundamentals-pod-kaiohenriqueps
+    spec:
+      serviceAccount: learnk8s-challenge
+      containers:
+        - name: fundamentals-pod-kaiohenriqueps
+          image: learnk8s/fundamentals:pod

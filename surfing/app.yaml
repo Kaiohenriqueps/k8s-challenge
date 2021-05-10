@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fundamentals-surfing-kaiohps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: fundamentals-surfing-kaiohps
+  template:
+    metadata:
+     labels:
+      name: fundamentals-surfing-kaiohps
+    spec:
+      serviceAccountName: learnk8s-challenge
+      containers:
+        - name: fundamentals-surfing-kaiohps
+          image: learnk8s/fundamentals:surfing
